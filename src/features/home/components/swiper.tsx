@@ -75,7 +75,7 @@ const Hero = () => {
                   onClick={() => navigate(`/movie/${slide.id}`)}
                   className="mt-4 mx-auto flex justify-center items-center gap-[7px] text-center text-[#C61F1F] py-[14px] px-[127px] bg-white hover:bg-[#ccc] hover:cursor-pointer rounded-[12px] font-semibold text-[16px] leading-[125%] tracking-[0.01em]"
                 >
-                  ▶️Смотреть
+                  Смотреть
                 </button>
               </div>
             </div>
