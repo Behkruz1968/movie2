@@ -89,9 +89,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center text-xs mt-10 text-gray-500 dark:text-gray-400">
-        © {new Date().getFullYear()} MyCompany. All rights reserved.
-      </div>
+      
     </footer>
   );
 };
