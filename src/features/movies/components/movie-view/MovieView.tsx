@@ -37,7 +37,7 @@ const MovieView: FC<Props> = ({ data }) => {
                   : "/fallback-image.jpg"
               }
               alt={movie.title || "Movie poster"} 
-              className="w-full h-[360px] object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300" // Fixed typo
+              className="w-full h-[360px] object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300" 
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
