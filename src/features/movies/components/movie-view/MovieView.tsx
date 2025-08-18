@@ -23,7 +23,7 @@ const MovieView: FC<Props> = ({ data }) => {
   };
 
   const handleBookmark = (e: React.MouseEvent, movie: Movie) => {
-    e.stopPropagation(); // Kartaga bosishni bloklaydi
+    e.stopPropagation(); // Prevents triggering card click
 
     const stored = localStorage.getItem("bookmarkedMovies");
     const bookmarks: Movie[] = stored ? JSON.parse(stored) : [];
@@ -32,9 +32,9 @@ const MovieView: FC<Props> = ({ data }) => {
     if (!alreadyExists) {
       const updated = [...bookmarks, movie];
       localStorage.setItem("bookmarkedMovies", JSON.stringify(updated));
-      alert(`"${movie.title}" bookmark qilindi!`);
+      alert(`"${movie.title}" bookmarked!`);
     } else {
-      alert(`"${movie.title}" allaqachon bookmark qilingan.`);
+      alert(`"${movie.title}" already bookmarked`);
     }
   };
 
@@ -49,7 +49,7 @@ const MovieView: FC<Props> = ({ data }) => {
           onClick={() => handleCardClick(movie.id)}
         >
           <div className="relative">
-            
+           
             <img
               src={bookmark}
               alt="Bookmark icon"
@@ -57,37 +57,42 @@ const MovieView: FC<Props> = ({ data }) => {
               className="absolute top-2 right-2 w-6 h-6 z-10 opacity-80 hover:opacity-100 transition-opacity duration-200"
             />
 
-            
+         
             <img
               src={
                 movie.poster_path
                   ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                   : "https://parniangostar.com/_next/static/media/imgFallBack.581a9fe3.png"
               }
-<<<<<<< HEAD
               alt={movie.title || "Movie poster"}
               className="w-full h-[360px] object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300"
-=======
-              alt={movie.title || "Movie poster"} 
-              className="w-full h-[360px] object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300" 
->>>>>>> 3d863921374d6f43edda727d85a004f1aa807fc6
               loading="lazy"
             />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
           </div>
 
-          
+          {/* Movie info */}
           <div className="p-4">
-            <h3 className="font-bold line-clamp-1 text-white text-lg md:text-xl" title={movie.title}>
+            <h3
+              className="font-bold line-clamp-1 text-white text-lg md:text-xl"
+              title={movie.title}
+            >
               {movie.title}
             </h3>
-            <h3 className="line-clamp-2 text-gray-300 text-sm md:text-base mt-2" title={movie.overview}>
+            <h3
+              className="line-clamp-2 text-gray-300 text-sm md:text-base mt-2"
+              title={movie.overview}
+            >
               {movie.overview}
             </h3>
             <div className="flex gap-4 mt-3 items-center">
-              <p className="text-yellow-400 font-semibold text-sm">⭐ {movie.vote_average.toFixed(1)}/10</p>
-              <span className="text-gray-400 text-sm">{movie.release_date?.split("-")[0]}</span>
+              <p className="text-yellow-400 font-semibold text-sm">
+                ⭐ {movie.vote_average.toFixed(1)}/10
+              </p>
+              <span className="text-gray-400 text-sm">
+                {movie.release_date?.split("-")[0]}
+              </span>
             </div>
           </div>
         </div>
