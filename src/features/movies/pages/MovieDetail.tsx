@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from "react";
 import { api } from "../../../shared/api/index";
 import { UserOutlined } from "@ant-design/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
