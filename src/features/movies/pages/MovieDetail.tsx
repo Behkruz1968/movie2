@@ -84,7 +84,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
   const [recommendations, setRecommendations] = useState<RecommendedMovie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedActor, setSelectedActor] = useState<ActorDetail | null>(null); // Tanlangan aktyor uchun state
+  const [selectedActor, setSelectedActor] = useState<ActorDetail | null>(null); 
 
   useEffect(() => {
     const fetchData = async () => {

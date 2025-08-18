@@ -64,8 +64,13 @@ const MovieView: FC<Props> = ({ data }) => {
                   ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                   : "https://parniangostar.com/_next/static/media/imgFallBack.581a9fe3.png"
               }
+<<<<<<< HEAD
               alt={movie.title || "Movie poster"}
               className="w-full h-[360px] object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300"
+=======
+              alt={movie.title || "Movie poster"} 
+              className="w-full h-[360px] object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-300" 
+>>>>>>> 3d863921374d6f43edda727d85a004f1aa807fc6
               loading="lazy"
             />
 
