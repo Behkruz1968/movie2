@@ -23,7 +23,7 @@ const MovieView: FC<Props> = ({ data }) => {
   };
 
   const handleBookmark = (e: React.MouseEvent, movie: Movie) => {
-    e.stopPropagation(); // Prevents triggering card click
+    e.stopPropagation(); 
 
     const stored = localStorage.getItem("bookmarkedMovies");
     const bookmarks: Movie[] = stored ? JSON.parse(stored) : [];
@@ -72,7 +72,7 @@ const MovieView: FC<Props> = ({ data }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
           </div>
 
-          {/* Movie info */}
+    
           <div className="p-4">
             <h3
               className="font-bold line-clamp-1 text-white text-lg md:text-xl"
