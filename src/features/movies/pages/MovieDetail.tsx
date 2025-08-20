@@ -1,10 +1,10 @@
-  import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../../shared/api/index";
 import { UserOutlined } from "@ant-design/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link, useParams } from "react-router-dom";
-import "swiper/swiper-bundle.css"; 
-
+import { Link, useParams, useNavigate } from "react-router-dom";
+import "swiper/swiper-bundle.css";
+import exit from "../../../shared/assets/circle-chevron-left.svg";
 
 interface CastMember {
   cast_id: number;
@@ -22,6 +22,7 @@ interface ActorDetail {
   birthday: string | null;
   place_of_birth: string | null;
   profile_path: string | null;
+  popularity: number;
 }
 
 interface VideoItem {
@@ -69,12 +70,12 @@ interface RecommendedMovie {
   poster_path: string | null;
 }
 
-
 interface MovieDetailProps {
   movieId?: number;
 }
 
 const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const movieId = propMovieId ?? Number(id);
 
@@ -84,7 +85,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
   const [recommendations, setRecommendations] = useState<RecommendedMovie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedActor, setSelectedActor] = useState<ActorDetail | null>(null); 
+  const [selectedActor, setSelectedActor] = useState<ActorDetail | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,7 +122,6 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
     if (movieId) fetchData();
   }, [movieId]);
 
- 
   const fetchActorDetails = async (actorId: number) => {
     try {
       const { data } = await api.get<ActorDetail>(`person/${actorId}`, {
@@ -150,6 +150,14 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 text-white bg-zinc-900 rounded-xl shadow-xl">
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center mb-4 hover:text-red-500 transition"
+      >
+        <img src={exit} alt="Exit" className="w-10 mr-2" />
+        Выйти
+      </button>
+
       {images.length > 0 && (
         <Swiper spaceBetween={10} slidesPerView={1} loop className="mb-6 rounded-lg overflow-hidden">
           {images.map((imgUrl, index) => (
@@ -166,18 +174,15 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
           alt={movie.title}
           className="w-full md:w-64 rounded-lg object-cover shadow"
         />
-
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
           {movie.tagline && <p className="italic text-gray-400 mb-4">"{movie.tagline}"</p>}
-
           <div className="flex flex-wrap gap-3 text-sm text-gray-300 mb-4">
             <span>⭐ {movie.vote_average.toFixed(1)}</span>
             <span>{movie.runtime} мин</span>
             <span>{movie.release_date}</span>
             <span>{movie.status}</span>
           </div>
-
           <div className="mb-4">
             <h2 className="text-xl font-semibold mb-2">Жанры:</h2>
             <div className="flex gap-2 flex-wrap">
@@ -188,9 +193,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
               ))}
             </div>
           </div>
-
           <p className="text-gray-300 whitespace-pre-line leading-relaxed">{movie.overview}</p>
-
           {movie.homepage && (
             <a
               href={movie.homepage}
@@ -268,6 +271,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
             />
             <p><strong>Дата рождения:</strong> {selectedActor.birthday || "Неизвестно"}</p>
             <p><strong>Место рождения:</strong> {selectedActor.place_of_birth || "Неизвестно"}</p>
+            <p><strong>Рейтинг:⭐</strong>{selectedActor.popularity.toFixed(1)}/10</p>
             <p className="text-gray-300 mt-2">{selectedActor.biography || "Биография отсутствует"}</p>
             <button
               onClick={() => setSelectedActor(null)}

@@ -5,7 +5,7 @@ body {
   color: white;
 }
 
-/* container */
+
 .container {
   max-width: 1340px;
   margin: 0 auto;
@@ -31,6 +31,7 @@ body {
   color: red;
 }
 
+/* Umumiy desktop default */
 nav {
   display: flex;
   flex-direction: row;
@@ -41,7 +42,14 @@ nav {
   margin-top: 20px;
 }
 
-/* 📱 Custom 280px responsive */
+/* Mobil versiyada nav yashirish */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+}
+
+/* Juda kichik ekranlar uchun ham moslashuv */
 @media (max-width: 280px) {
   header img {
     width: 80px !important;

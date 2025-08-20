@@ -76,6 +76,7 @@ const BookmarkPage: FC = () => {
                 <div className="flex gap-4 mt-3 items-center">
                   <p className="text-yellow-400 font-semibold text-sm">⭐ {movie.vote_average.toFixed(1)}/10</p>
                   <span className="text-gray-400 text-sm">{movie.release_date?.split("-")[0]}</span>
+                  {/* movie.release_date?.split("-")[0]  - = {"2023",05,18} [0]=massivni ichidagi 1chisini oladi */}
                 </div>
               </div>
             </div>

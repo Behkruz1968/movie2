@@ -38,7 +38,7 @@ const MovieView: FC<Props> = ({ data }) => {
     }
   };
 
-  const limitedData = data?.slice(0, 8);
+  const limitedData = data?.slice(0, 20);
 
   return (
     <div className="container mx-auto grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-4">
@@ -49,13 +49,24 @@ const MovieView: FC<Props> = ({ data }) => {
           onClick={() => handleCardClick(movie.id)}
         >
           <div className="relative">
-           
-            <img
-              src={bookmark}
-              alt="Bookmark icon"
-              onClick={(e) => handleBookmark(e, movie)}
-              className="absolute top-2 right-2 w-6 h-6 z-10 opacity-80 hover:opacity-100 transition-opacity duration-200"
-            />
+<div
+  onClick={(e) => handleBookmark(e, movie) }
+  className="
+    absolute top-2 right-2 z-20 
+    opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100
+    transition-all duration-300 ease-out
+    cursor-pointer
+    flex items-center justify-center
+    w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md
+  "
+>
+  <img
+    src={bookmark}
+    alt="Bookmark icon"
+    className="w-5 h-5"
+  />
+</div>
+
 
          
             <img
