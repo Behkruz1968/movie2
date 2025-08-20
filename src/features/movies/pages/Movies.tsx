@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import { useMovie } from "../service/useMovie";
 import MovieView from "../components/movie-view/MovieView";
 import { Pagination, Select } from "antd";
@@ -7,40 +7,44 @@ import { useGenre } from "../service/useGenre";
 
 const Movies = () => {
   const { getMovies } = useMovie();
-  const {getGenres} = useGenre()
-  const [params, setParams] = useSearchParams()
-  // const limit = params.get("limit")
-  // const [page,setPage] = useState(1)
-  // const [genre,setGenre] = useState("")
+  const { getGenres } = useGenre();
+  const [params, setParams] = useSearchParams();
 
-  const page = params.get("page") || "1"
-  const with_genres = params.get("laylo") || ""
+  const page = params.get("page") || "1";
+  const with_genres = params.get("laylo") || "";
 
-  const { data } = getMovies({ page, with_genres, sort_by: "popularity.desc", });
-  const {data: genreData} = getGenres()
-  const options = genreData?.genres?.map(({id, name}:any) => ({value: id.toString(), label:name}))
-  
+  const { data } = getMovies({
+    page,
+    with_genres,
+    sort_by: "popularity.desc",
+  });
+
+  const { data: genreData } = getGenres();
+  const options = genreData?.genres?.map(({ id, name }: any) => ({
+    value: id.toString(),
+    label: name,
+  }));
 
   const handleChange = (value: number) => {
-    // setPage(value)
-    params.set("page", value.toString())
-    setParams(params)
-
-    // params.set("limit", "10")
-    // params.set("skip", "5")
-    // params.set("genre", "animation")
-    // setParams(params)
+    params.set("page", value.toString());
+    setParams(params);
   };
-  const handleChangeGenre = (value:string) => {
-    // setGenre(value);
-    params.set("laylo", value)
-    setParams(params)
-  }
+
+  const handleChangeGenre = (value: string) => {
+    params.set("laylo", value);
+    setParams(params);
+  };
+
   return (
     <div className="Movies">
       <h2>Movies</h2>
       <div className="container">
-        <Select onChange={handleChangeGenre} className="w-40" placeholder="Select genre" options={options}/>
+        <Select
+          onChange={handleChangeGenre}
+          className="w-40"
+          placeholder="Select genre"
+          options={options}
+        />
       </div>
       <MovieView data={data?.results} />
       <div className="flex justify-center">
