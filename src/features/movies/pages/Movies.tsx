@@ -37,8 +37,8 @@ const Movies = () => {
 
   return (
     <div className="Movies">
-      <h2>Movies</h2>
-      <div className="container">
+      
+      <div className="container " >
         <Select
           onChange={handleChangeGenre}
           className="w-40"

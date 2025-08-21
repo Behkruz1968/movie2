@@ -1,7 +1,7 @@
 import {  useEffect, useState, type FC } from "react";
 import { useNavigate } from "react-router-dom";
 import bookmark from "../../../shared/assets/bookmark.svg";
-
+import empty from '../../../shared/assets/empty.gif'
 interface Movie {
   id: number;
   title: string;
@@ -38,7 +38,16 @@ const BookmarkPage: FC = () => {
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold text-white mb-6">Bookmark page</h2>
       {bookmarkedMovies.length === 0 ? (
-        <p className="text-gray-400">You don't have a saved film</p>
+       <div className="flex flex-col items-center justify-center mt-[70px]">
+          <img
+            src={empty}
+            alt="empty"
+            className="w-60 h-60 object-contain mb-4 opacity-70"
+          />
+          <p className="text-gray-400 text-xl font-medium mb-[80px]">
+            У вас пока нет закладок
+          </p>
+        </div>
       ) : (
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
           {bookmarkedMovies.map((movie) => (

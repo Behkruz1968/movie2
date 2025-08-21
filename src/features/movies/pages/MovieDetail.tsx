@@ -285,7 +285,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movieId: propMovieId }) => {
 
       {recommendations.length > 0 && (
         <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">Tavsiya etilgan filmlar</h2>
+          <h2 className="text-2xl font-bold mb-4">Рекомендованные фильмы</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {recommendations.map((rec) => (
               <Link to={`/movie/${rec.id}`} key={rec.id}>

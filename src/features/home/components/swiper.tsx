@@ -6,7 +6,8 @@ import 'swiper/css/thumbs';
 import { useMovie } from '../../movies/service/useMovie';
 import { Navigation, Thumbs, Autoplay } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
-
+import { CaretRightOutlined } from '@ant-design/icons';
+import logo from '../../../shared/assets/logo.svg'
 interface Slide {
   id: number;
   title: string;
@@ -17,8 +18,9 @@ interface Slide {
 }
 
 const Swayper = () => {
+  
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  const { getMovies } = useMovie({ page: 12 }); // default params
+  const { getMovies } = useMovie({ page: 15 });
   const { data, isLoading } = getMovies();
   const navigate = useNavigate();
 
@@ -28,15 +30,33 @@ const Swayper = () => {
     }
   }, [data]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+if (isLoading) {
+  return (
+    <div className="flex items-center justify-center h-screen bg-black">
+      <div className="flex flex-col items-center space-y-6">
+        {/* Logo */}
+        <img
+          src={logo}
+          alt="Loading..."
+          className="w-32 h-32 animate-bounce"
+        />
+  
+        <div className="w-12 h-12 border-4 border-t-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        <p className="text-white text-xl font-semibold animate-pulse">
+          Грузим данные....
+        </p>
+      </div>
+    </div>
+  );
+}
 
-  const slides = data?.results || [];
+
+  const slides = (data?.results || []).slice(0, 7);
 
   return (
     <div className="w-full max-w-[1200px] mx-auto mb-[50px]">
       <Swiper
+      
         modules={[Navigation, Thumbs, Autoplay]}
         navigation
         thumbs={{ swiper: thumbsSwiper }}
@@ -71,7 +91,7 @@ const Swayper = () => {
                   onClick={() => navigate(`/movie/${slide.id}`)}
                   className="mt-4 mx-auto flex justify-center items-center gap-[7px] py-[14px] px-[127px] bg-white text-[#C61F1F] hover:bg-[#ccc] rounded-[12px] font-semibold"
                 >
-                  Смотреть
+                 <CaretRightOutlined className="text-2xl" /> Смотреть
                 </button>
               </div>
             </div>

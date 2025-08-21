@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import Movies from "../features/movies/pages/Movies";
+import SeachPage from "../features/search/pages/SeachPage";
 
 
 const MainLayout = lazy(()=> import("../layout/MainLayout"))
@@ -19,6 +20,7 @@ const AppRoutes = () => {
           {path:"bookmark", element:<Bookmark/> },
           {path:"movies", element:<Movies/> },
           {path:"movie/:id", element:<MovieDetail/> },
+          {path:"search" , element:<SeachPage/>}
         ]
     }
   ]);
